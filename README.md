@@ -1,2 +1,3 @@
-# grimoire
-Web Component to be used with Genie
+# Grimoire :book:
+
+Web Component library to be used with Genie
