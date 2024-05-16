@@ -1,7 +1,7 @@
 import { Mote } from '@magik_io/mote';
 import { ulid } from 'ulid';
 
-class SlideToggle extends HTMLElement {
+export class SlideToggle extends HTMLElement {
   protected __template = document.createElement('template');
   protected __sRoot: ShadowRoot | undefined;
   protected __input: Mote | undefined
@@ -91,7 +91,7 @@ class SlideToggle extends HTMLElement {
   }
 }
 
-export default ({
+export const Template = ({
   name: 'SlideToggle' as const,
   constructor: SlideToggle,
   type: 'custom-element' as const

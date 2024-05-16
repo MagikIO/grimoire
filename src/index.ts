@@ -5,16 +5,21 @@ interface ComponentDescriptor {
   extends?: string;
 }
 
-const Components = {
-  SlideToggle: './slideToggle/SlideToggle.js',
-}
+export type ComponentNames = ['SlideToggle'];
 
-export default async function DefineGrimoire(...components: Array<keyof typeof Components>) {
-  for await (const component of components) {
+export default async function DefineGrimoire(...components: Array<ComponentNames[number]>) {
+  for await (const componentName of components) {
+    let component: ComponentDescriptor;
     try {
-      const componentModule = await import(`${Components[component]}`) as ComponentDescriptor;
-      if (!componentModule) throw new Error(`Component ${component} not found`);
-      const { name, constructor, type, extends: extendsElement } = componentModule;
+      switch (componentName) {
+        case 'SlideToggle':
+          component = (await import('./slideToggle/SlideToggle.js')).Template;
+          break;
+        default:
+          throw new Error(`Component ${componentName} not found`);
+      }
+      if (!component) throw new Error(`Component ${component} not found`);
+      const { name, constructor, type, extends: extendsElement } = component;
       switch (type) {
         case 'custom-element':
           customElements.define(name, constructor);

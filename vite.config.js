@@ -1,6 +1,7 @@
 // vite.config.js
 import { resolve, join } from 'path'
 import { defineConfig } from 'vite'
+import dtsPlugin from 'vite-plugin-dts'
 
 export default defineConfig({
   build: {
@@ -12,4 +13,5 @@ export default defineConfig({
       name: 'Grimoire',
     },
   },
+  plugins: [dtsPlugin({ bundledPackages: true })],
 })
