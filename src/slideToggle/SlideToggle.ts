@@ -91,7 +91,6 @@ class SlideToggle extends HTMLElement {
   }
 }
 
-
 export default ({
   name: 'SlideToggle' as const,
   constructor: SlideToggle,

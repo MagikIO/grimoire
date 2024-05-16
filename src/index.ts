@@ -13,7 +13,7 @@ const Components = {
 export default async function DefineGrimoire(...components: Array<keyof typeof Components>) {
   for await (const component of components) {
     try {
-      const componentModule = await import(Components[component]) as ComponentDescriptor;
+      const componentModule = await import(`${Components[component]}`) as ComponentDescriptor;
       if (!componentModule) throw new Error(`Component ${component} not found`);
       const { name, constructor, type, extends: extendsElement } = componentModule;
       switch (type) {
