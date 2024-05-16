@@ -13,5 +13,5 @@ export default defineConfig({
       name: 'Grimoire',
     },
   },
-  plugins: [dtsPlugin({})],
+  plugins: [dtsPlugin({ bundledPackages: true })],
 })
