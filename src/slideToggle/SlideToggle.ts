@@ -96,3 +96,5 @@ export const Template = ({
   constructor: SlideToggle,
   type: 'custom-element' as const
 })
+
+export default Template

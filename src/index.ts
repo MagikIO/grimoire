@@ -6,28 +6,32 @@ interface ComponentDescriptor {
 }
 
 export type ComponentNames = ['SlideToggle'];
+const componentImportMap: Record<ComponentNames[number], () => Promise<{ default: ComponentDescriptor }>> = {
+  'SlideToggle': () => import('./slideToggle/SlideToggle'),
+};
+
+function defineElement(component: ComponentDescriptor) {
+  switch (component.type) {
+    case 'custom-element':
+      customElements.define(component.name, component.constructor);
+      break;
+    case 'extends-element':
+      customElements.define(component.name, component.constructor, { extends: component.extends });
+      break;
+    default: throw new Error(`Type ${component.type} not found`);
+  }
+}
 
 export default async function DefineGrimoire(...components: Array<ComponentNames[number]>) {
   for await (const componentName of components) {
-    let component: ComponentDescriptor;
     try {
-      switch (componentName) {
-        case 'SlideToggle':
-          component = (await import('./slideToggle/SlideToggle.js')).Template;
-          break;
-        default:
-          throw new Error(`Component ${componentName} not found`);
-      }
-      if (!component) throw new Error(`Component ${component} not found`);
-      const { name, constructor, type, extends: extendsElement } = component;
-      switch (type) {
-        case 'custom-element':
-          customElements.define(name, constructor);
-          break;
-        case 'extends-element':
-          customElements.define(name, constructor, { extends: extendsElement });
-          break;
-      }
+      const importFunction = componentImportMap[componentName];
+      if (!importFunction) throw new Error(`Component ${componentName} not found`);
+
+      const { default: component } = await importFunction();
+      if (!component) throw new Error(`Component ${componentName} not found`);
+
+      defineElement(component);
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -37,4 +41,3 @@ export default async function DefineGrimoire(...components: Array<ComponentNames
     }
   }
 }
-
