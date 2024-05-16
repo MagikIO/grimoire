@@ -60,8 +60,8 @@ class SlideToggle extends HTMLElement {
     super();
   }
 
-  protected __attachStyle(target: ShadowRoot){
-    if (!document.getElementById('SlideToggleStyle')){
+  protected __attachStyle(target: ShadowRoot) {
+    if (!document.getElementById('SlideToggleStyle')) {
       new Mote('style#SlideToggleStyle').textContent(this.__style).appendTo(target)
     }
   }
@@ -93,7 +93,7 @@ class SlideToggle extends HTMLElement {
 
 
 export default ({
-  name: 'SlideToggle',
+  name: 'SlideToggle' as const,
   constructor: SlideToggle,
-  type: 'custom-element'
+  type: 'custom-element' as const
 })
