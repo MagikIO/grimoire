@@ -1,13 +1,13 @@
 {
   "name": "@magik_io/grimoire",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Web Component Library for Genie",
   "engines": {
     "node": "21.*.*",
     "npm": "10.*.*"
   },
   "scripts": {
-    "bundle": "esbuild src/index.ts --bundle --minify --sourcemap --outfile=dist/index.js && tsc --declaration --emitDeclarationOnly --declarationDir dist",
+    "build": "node ./esbuild.js && tsc --declaration --emitDeclarationOnly --declarationDir dist",
     "publish": "npm publish --access public"
   },
   "type": "module",
@@ -38,8 +38,8 @@
     "url": "https://github.com/MagikIO/grimoire/issues"
   },
   "browserslist": [
-    "last 2 version",
-    "> 1%"
+    "defaults and fully supports es6-module",
+    "maintained node versions"
   ],
   "homepage": "https://github.com/MagikIO/grimoire#readme",
   "packageManager": "yarn@4.2.2",
