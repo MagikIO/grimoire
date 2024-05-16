@@ -5,7 +5,6 @@ interface ComponentDescriptor {
   extends?: string;
 }
 
-
 const Components = {
   SlideToggle: './slideToggle/SlideToggle.js',
 }

@@ -4,7 +4,7 @@ import { ulid } from 'ulid';
 class SlideToggle extends HTMLElement {
   protected __template = document.createElement('template');
   protected __sRoot: ShadowRoot | undefined;
-  protected __input: Mote<`input#${string}`, true> | undefined
+  protected __input: Mote | undefined
   protected __label: Mote<"label", true> | undefined
   protected __style = `
   :host {
