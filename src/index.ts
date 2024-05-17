@@ -1,9 +1,4 @@
-export interface ComponentDescriptor {
-  name: string;
-  constructor: CustomElementConstructor;
-  type: 'custom-element' | 'extends-element';
-  extends?: string;
-}
+import type { ComponentDescriptor } from './ComponentDescriptor';
 
 export type GrimoireTemplateNames = ['slide-toggle'];
 const GrimoireImportMap: Record<GrimoireTemplateNames[number], () => Promise<{ default: ComponentDescriptor }>> = {
@@ -14,10 +9,10 @@ export default class Grimoire {
   protected static asAbove(component: ComponentDescriptor) {
     switch (component.type) {
       case 'custom-element':
-        customElements.define(component.name, component.constructor);
+        customElements.define(component.name, component.element);
         break;
       case 'extends-element':
-        customElements.define(component.name, component.constructor, { extends: component.extends });
+        customElements.define(component.name, component.element, { extends: component.extendsEl });
         break;
       default: throw new Error(`Type ${component.type} not found`);
     }
