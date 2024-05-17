@@ -1,12 +1,13 @@
 {
   "name": "@magik_io/grimoire",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "A Web Component Library for Genie",
   "engines": {
     "node": "21.*.*",
     "npm": "10.*.*"
   },
   "scripts": {
+    "dev": "vite",
     "build": "vite build",
     "publish": "npm publish --access public"
   },
@@ -18,7 +19,7 @@
     }
   },
   "dependencies": {
-    "@magik_io/mote": "^1.5.3",
+    "@magik_io/mote": "^1.6.0",
     "ulid": "^2.3.0"
   },
   "devDependencies": {

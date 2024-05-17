@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>So Mote it be</title>
+</head>
+
+<body>
+  <slide-toggle label="Nice to meet you" checked="true" />
+</body>
+
+<script type="module">
+  import Grimoire from './src/index.ts'
+
+  (async () => {
+    await Grimoire.Define('slide-toggle');
+  })()
+</script>
+
+</html>
