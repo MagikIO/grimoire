@@ -1,26 +1,19 @@
 {
   "name": "@magik_io/grimoire",
-  "version": "1.5.5",
+  "version": "1.6.0",
   "description": "A Web Component Library for Genie",
   "engines": {
     "node": "21.*.*",
     "npm": "10.*.*"
   },
   "scripts": {
-    "build": "vite build --mode production",
+    "build": "vite build",
     "publish": "npm publish --access public"
   },
   "type": "module",
-  "main": "dist/index.umd.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.umd.cjs",
       "types": "./dist/index.d.ts"
     }
   },
@@ -41,6 +34,12 @@
     "type": "git",
     "url": "git+https://github.com/MagikIO/grimoire.git"
   },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "Web Components",
     "magik"

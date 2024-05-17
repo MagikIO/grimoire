@@ -11,7 +11,9 @@ export default defineConfig({
         join(resolve(__dirname, 'src'), 'index.ts'),
       ],
       name: 'Grimoire',
+      formats: ['es'],
     },
+    minify: false,
   },
-  plugins: [dtsPlugin({ bundledPackages: true })],
+  plugins: [dtsPlugin({ rollupTypes: true })],
 })
