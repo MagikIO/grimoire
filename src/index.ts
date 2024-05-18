@@ -1,4 +1,5 @@
-import type { ComponentDescriptor } from './ComponentDescriptor';
+import { Mote } from '@magik_io/mote';
+import type { ComponentDescriptor } from './processing/ComponentDescriptor';
 
 export type GrimoireTemplateNames = ['slide-toggle'];
 const GrimoireImportMap: Record<GrimoireTemplateNames[number], () => Promise<{ default: ComponentDescriptor }>> = {
@@ -6,7 +7,25 @@ const GrimoireImportMap: Record<GrimoireTemplateNames[number], () => Promise<{ d
 }
 
 export default class Grimoire {
+  static styleBlocks = [] as string[];
+
+  protected static Adorn() {
+    new Mote('style').html(Grimoire.styleBlocks.join('')).appendToHead();
+  }
+
   protected static asAbove(component: ComponentDescriptor) {
+    component.styleVars.originalString.forEach((styleBlock) => {
+      Grimoire.styleBlocks.push(styleBlock);
+    });
+
+    component.style.originalString.forEach((styleBlock) => {
+      Grimoire.styleBlocks.push(styleBlock);
+    });
+
+    return this;
+  }
+
+  protected static soBelow(component: ComponentDescriptor) {
     switch (component.type) {
       case 'custom-element':
         customElements.define(component.name, component.element);
@@ -16,24 +35,35 @@ export default class Grimoire {
         break;
       default: throw new Error(`Type ${component.type} not found`);
     }
+
+    return this;
   }
 
   public static async Define(...components: GrimoireTemplateNames) {
     for await (const componentName of components) {
-      try {
-        const importFunction = GrimoireImportMap[componentName];
-        if (!importFunction) throw new Error(`Component ${componentName} not found`);
+      const importFunction = GrimoireImportMap[componentName];
+      if (!importFunction) throw new Error(`[GRIMOIRE] ~> Component ${componentName} not found`);
 
-        const { default: component } = await importFunction();
-        if (!component) throw new Error(`Component ${componentName} not found`);
+      const { default: component } = await importFunction();
+      if (!component) throw new Error(`[GRIMOIRE] ~> Component ${componentName} not found`);
 
-        Grimoire.asAbove(component);
-      } catch (error) {
-        if (error instanceof Error) {
-          throw new Error(`[GRIMOIRE] ~> Error: ${error.message}`, error);
-        }
-        throw new Error(`[GRIMOIRE] ~> Error: ${error}`);
-      }
+      Grimoire.asAbove(component).soBelow(component)
     }
+
+    Grimoire.Adorn();
+  }
+
+  public static async Hint(...components: GrimoireTemplateNames) {
+    const StylesVarsPerComponent = await Promise.all(components.map(async (componentName) => {
+      const importFunction = GrimoireImportMap[componentName];
+      if (!importFunction) throw new Error(`[GRIMOIRE] ~> Component ${componentName} not found`);
+
+      const { default: component } = await importFunction();
+      if (!component) throw new Error(`[GRIMOIRE] ~> Component ${componentName} not found`);
+
+      return { component: component.name, styles: component.styleVars };
+    }))
+
+    return StylesVarsPerComponent;
   }
 }

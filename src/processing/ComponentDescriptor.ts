@@ -1,33 +1,36 @@
+import { CSSVars as CSS } from './CSSVars'
+
 export interface iComponentDescriptor<
   Name extends string = string,
   ElIs extends 'custom-element' | 'extends-element' = 'custom-element' | 'extends-element',
-  ElConstructor extends CustomElementConstructor = CustomElementConstructor,
-  Styles extends Record<string, string> = Record<string, string>
+  ElConstructor extends CustomElementConstructor = CustomElementConstructor
 > {
   name: Name
   element: ElConstructor
   type: ElIs
   extendsEl?: string
-  styleVars?: Styles
+  styleVars: (CSSVars: typeof CSS) => ReturnType<typeof CSS>,
+  style: (CSSVars: typeof CSS) => ReturnType<typeof CSS>,
 }
 
 export class ComponentDescriptor<
   Name extends string = string,
   ElIs extends 'custom-element' | 'extends-element' = 'custom-element' | 'extends-element',
-  ElConstructor extends CustomElementConstructor = CustomElementConstructor,
-  Styles extends Record<string, string> = Record<string, string>
-> implements iComponentDescriptor<Name, ElIs, ElConstructor, Styles> {
+  ElConstructor extends CustomElementConstructor = CustomElementConstructor
+> {
   public name: Name
   public element: ElConstructor
   public type: ElIs
+  public style: ReturnType<typeof CSS>
+  public styleVars: ReturnType<typeof CSS>
   public extendsEl?: string
-  public styleVars?: Styles
 
-  constructor({ name, element, type, styleVars, extendsEl }: iComponentDescriptor<Name, ElIs, ElConstructor, Styles>) {
+  constructor({ name, element, type, style, styleVars, extendsEl }: iComponentDescriptor<Name, ElIs, ElConstructor>) {
     this.name = name
     this.element = element
     this.type = type
-    this.styleVars = styleVars
+    this.style = style(CSS)
+    this.styleVars = styleVars(CSS)
     this.extendsEl = extendsEl
   }
 }

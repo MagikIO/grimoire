@@ -1,5 +1,5 @@
 import { Mote } from '@magik_io/mote';
-import { ComponentDescriptor } from '../ComponentDescriptor';
+import { ComponentDescriptor } from '../processing/ComponentDescriptor';
 
 class SlideToggle extends HTMLElement {
   protected __meta = { checked: false, label: '', idPrefix: 'slide-toggle' }
@@ -35,18 +35,40 @@ class SlideToggle extends HTMLElement {
 
     this.__input.appendTo(this.__template.self())
     this.__label.appendTo(this.__template.self())
-    if (!document.getElementById('SlideToggleStyle')) {
-      new Mote('style#SlideToggleStyle').textContent(`
-body {
-  --st-body-bg: #212529;
-  --st-check-bg: var(--st-body-bg);
-  --st-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0, 0, 0, .25)'/%3e%3c/svg%3e");
-  --st-border-width: 1px;
-  --st-border-color: rgba(0, 0, 0, .25);
-  --st-checked-bg: #0d6efd
+    this.__template.appendTo(this)
+  }
 }
 
-.slide-input {
+/**
+ * ## SlideToggle Magik Component
+ * @element slide-toggle
+ * @attr {string} [checked=false] - The initial state of the slide toggle
+ * @attr {string} [label=''] - The label text for the slide toggle
+ * @attr {string} [name='slide-toggle'] - The name of the input element
+ * ---
+ * ### Style Variables
+ * @cssprop {color} [--st-body-bg=#212529] - The background color of the slide toggle
+ * @cssprop {color} [--st-check-bg=var(--st-body-bg)] - The background color of the checkmark
+ * @cssprop {image} [--st-check-bg-image=url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0, 0, 0, .25)'/%3e%3c/svg%3e")] - The background image of the checkmark
+ * @cssprop {length} [--st-border-width=1px] - The border width of the slide toggle
+ * @cssprop {color} [--st-border-color=rgba(0, 0, 0, .25)] - The border color of the slide toggle
+ * @cssprop {color} [--st-checked-bg=#0d6efd] - The background color of the slide toggle when checked
+ */
+export default new ComponentDescriptor({
+  name: 'slide-toggle',
+  element: SlideToggle,
+  type: 'custom-element',
+  styleVars: CSSVars => CSSVars`
+    body {
+      --st-body-bg: #212529;
+      --st-check-bg: var(--st-body-bg);
+      --st-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0, 0, 0, .25)'/%3e%3c/svg%3e");
+      --st-border-width: 1px;
+      --st-border-color: rgba(0, 0, 0, .25);
+      --st-checked-bg: #0d6efd
+    }`,
+  style: CSSVars => CSSVars`
+  .slide-input {
   --st-check-bg: var(--st-body-bg);
   flex-shrink: 0;
   width: 1em;
@@ -117,53 +139,5 @@ body {
     box-sizing: border-box;
     display: inline-block;
   }
-}`).appendToHead()
-    }
-
-    this.__template.appendTo(this)
-  }
-}
-
-/**
- * ## SlideToggle Magik Component
- * @element slide-toggle
- * @attr {string} [checked=false] - The initial state of the slide toggle
- * @attr {string} [label=''] - The label text for the slide toggle
- * @attr {string} [name='slide-toggle'] - The name of the input element
- * ---
- * ### Style Variables
- * @cssprop {color} [--st-body-bg=#212529] - The background color of the slide toggle
- * @cssprop {color} [--st-check-bg=var(--st-body-bg)] - The background color of the checkmark
- * @cssprop {image} [--st-check-bg-image=url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0, 0, 0, .25)'/%3e%3c/svg%3e")] - The background image of the checkmark
- * @cssprop {length} [--st-border-width=1px] - The border width of the slide toggle
- * @cssprop {color} [--st-border-color=rgba(0, 0, 0, .25)] - The border color of the slide toggle
- * @cssprop {color} [--st-checked-bg=#0d6efd] - The background color of the slide toggle when checked
- */
-export default new ComponentDescriptor({
-  name: 'slide-toggle',
-  /**
- * ## SlideToggle Magik Component
- * @element slide-toggle
- * @attr {string} [checked=false] - The initial state of the slide toggle
- * @attr {string} [label=''] - The label text for the slide toggle
- * @attr {string} [name='slide-toggle'] - The name of the input element
- * ---
- * ### Style Variables
- * @cssprop {color} [--st-body-bg=#212529] - The background color of the slide toggle
- * @cssprop {color} [--st-check-bg=var(--st-body-bg)] - The background color of the checkmark
- * @cssprop {image} [--st-check-bg-image=url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0, 0, 0, .25)'/%3e%3c/svg%3e")] - The background image of the checkmark
- * @cssprop {length} [--st-border-width=1px] - The border width of the slide toggle
- * @cssprop {color} [--st-border-color=rgba(0, 0, 0, .25)] - The border color of the slide toggle
- * @cssprop {color} [--st-checked-bg=#0d6efd] - The background color of the slide toggle when checked
- */
-  element: SlideToggle,
-  type: 'custom-element',
-  styleVars: {
-    '--st-body-bg': '#212529',
-    '--st-check-bg': 'var(--st-body-bg)',
-    '--st-check-bg-image': 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'-4 -4 8 8\'%3e%3ccircle r=\'3\' fill=\'rgba(0, 0, 0, .25)\'/%3e%3c/svg%3e")',
-    '--st-border-width': '1px',
-    '--st-border-color': 'rgba(0, 0, 0, .25)',
-    '--st-checked-bg': '#0d6efd',
-  } as const
+}`
 })
