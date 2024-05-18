@@ -3,7 +3,7 @@ import type { ComponentDescriptor } from './processing/ComponentDescriptor';
 
 export type GrimoireTemplateNames = ['slide-toggle'];
 const GrimoireImportMap: Record<GrimoireTemplateNames[number], () => Promise<{ default: ComponentDescriptor }>> = {
-  'slide-toggle': () => import('./slideToggle/SlideToggle'),
+  'slide-toggle': () => import('./components/SlideToggle'),
 }
 
 export default class Grimoire {
