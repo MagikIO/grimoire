@@ -8,6 +8,7 @@ const GrimoireImportMap: Record<GrimoireTemplateNames[number], () => Promise<{ d
 
 export default class Grimoire {
   static styleBlocks = [] as string[];
+  static styleVarBlocks = [] as Array<{ component: string, styleVars: Record<string, string> }>
 
   protected static Adorn() {
     new Mote('style').html(Grimoire.styleBlocks.join('')).appendToHead();
@@ -21,6 +22,8 @@ export default class Grimoire {
     component.style.originalString.forEach((styleBlock) => {
       Grimoire.styleBlocks.push(styleBlock);
     });
+
+    Grimoire.styleVarBlocks.push({ styleVars: component.styleVars.extractedVariables, component: component.name })
 
     return this;
   }
@@ -51,6 +54,8 @@ export default class Grimoire {
     }
 
     Grimoire.Adorn();
+
+    return this.styleVarBlocks;
   }
 
   public static async Hint(...components: GrimoireTemplateNames) {
