@@ -19,7 +19,7 @@
     }
   },
   "dependencies": {
-    "@magik_io/mote": "^1.6.0",
+    "@magik_io/mote": "^1.6.1",
     "ulid": "^2.3.0"
   },
   "devDependencies": {

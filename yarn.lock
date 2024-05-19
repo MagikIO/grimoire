@@ -331,7 +331,7 @@ __metadata:
   resolution: "@magik_io/grimoire@workspace:."
   dependencies:
     "@magik_io/lint_golem": "npm:^2.1.1"
-    "@magik_io/mote": "npm:^1.6.0"
+    "@magik_io/mote": "npm:^1.6.1"
     eslint: "npm:^9.3.0"
     typescript: "npm:^5.4.5"
     typescript-eslint: "npm:^7.9.0"
@@ -359,10 +359,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@magik_io/mote@npm:^1.6.0":
-  version: 1.6.0
-  resolution: "@magik_io/mote@npm:1.6.0"
-  checksum: 10c0/ea43eaac752f5d5b158a4efa5f0ba3ab43a5bf94903de4502c5f9d42ab45c7426cf37aa9fae681c492a29dc3da5c12d1d60581ef31602c21dd2735c087e2ebcf
+"@magik_io/mote@npm:^1.6.1":
+  version: 1.6.1
+  resolution: "@magik_io/mote@npm:1.6.1"
+  checksum: 10c0/6a0a26fe29299754b797552954b064ae5551fe1eb7acd13ab334d28c18acd4173d8466e0e5015011d49a53e119a957c517eead0053e324f1439fafa0dc762bc7
   languageName: node
   linkType: hard
 

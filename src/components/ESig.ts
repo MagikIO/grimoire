@@ -15,13 +15,14 @@ class ESig extends HTMLElement {
   }
   protected __span = new Mote('span');
   protected __icon = new Mote('i');
+  protected __nameToRender = '';
   constructor() { super(); }
 
   connectedCallback() {
     this.classList.add('ESignature')
 
     const icon = this.getAttribute('icon') || 'fas fa-cog';
-    this.__icon.addClass(icon)
+    this.__icon.addClass(icon).on('click', () => this.__showFontSelections())
 
     const fontAttr = this.getAttribute('font');
 
@@ -29,13 +30,63 @@ class ESig extends HTMLElement {
       ? this.__meta.fonts.get(fontAttr) ?? 'dancing-script'
       : 'dancing-script';
     // Get the text content inside of the open and close tags
-    const name = `${this.innerHTML}`.trim();
+    this.__nameToRender = `${this.innerHTML}`.trim();
     this.innerHTML = '';
 
     this.__span.addClass(font)
-    this.__span.textContent(name)
+    this.__span.textContent(this.__nameToRender)
     this.__span.appendTo(this)
     this.__icon.appendTo(this)
+  }
+
+  protected __showFontSelections() {
+    try {
+      const selectionsContainer = new Mote('div');
+      selectionsContainer.addClass('e-sig-font-selections');
+
+      Array.from(this.__meta.fonts.keys()).forEach((font, index) => {
+        const visualPicker = new Mote('div')
+        visualPicker.on('click', (e) => {
+          const input = e.target.querySelector('input');
+          if (input) input.click();
+        })
+
+        const input = new Mote(`input#${this.__meta.idPrefix}-${index}`)
+        input.set({ type: 'radio', name: 'eSigGeneratorFont', value: font })
+        input.on('change', (e) => {
+          this.__span.removeClass([...this.__meta.fonts.keys()])
+          this.__span.addClass(e.target.value as string)
+          selectionsContainer.remove()
+        })
+
+        const label = new Mote('label')
+        label.textContent(this.__nameToRender).addClass(font).htmlFor(`${this.__meta.idPrefix}-${index}`)
+
+        input.appendTo(visualPicker.element);
+        label.appendTo(visualPicker.element);
+        visualPicker.appendTo(selectionsContainer.element);
+      })
+
+      selectionsContainer.appendTo(this.parentElement);
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  static get observedAttributes() { return ['font', 'icon']; }
+
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (oldValue === newValue) return;
+    switch (name) {
+      case 'font':
+        if (this.__meta.fonts.has(newValue)) {
+          this.__span.removeClass(oldValue).addClass(newValue);
+        }
+        break;
+      case 'icon':
+        this.__icon.removeClass(oldValue).addClass(newValue);
+        break;
+    }
   }
 }
 
@@ -71,13 +122,51 @@ export default new ComponentDescriptor({
       '--eSig-padding': '0.35rem',
       '--eSig-margin-bottom': '0.25rem',
       '--eSig-icon': 'fas fa-cog',
-      '--eSig-fonts': `@import url("https://fonts.googleapis.com/css?family=Dancing+Script|Great+Vibes|Homemade+Apple|Marck+Script|Sacramento|Satisfy")`
     },
     base: CSSVars => CSSVars`
-    @import var(--eSig-fonts);
+    
     @keyframes Rotate {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    :root {
+      .dancing-script { font-family: 'Dancing Script', cursive; }
+      .great-vibes { font-family: 'Great Vibes', cursive; }
+      .homemade-apple { font-family: 'Homemade Apple', cursive; }
+      .marck-script { font-family: 'Marck Script', cursive; }
+      .sacramento { font-family: 'Sacramento', cursive; }
+      .satisfy { font-family: 'Satisfy', cursive; }
+    }
+
+    .e-sig-font-selections {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+
+      > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+        margin: 0.25rem;
+        border-radius: 0.25rem;
+        background-color: var(--eSig-bg);
+        color: var(--eSig-color);
+        cursor: pointer;
+        font-size: larger;
+        transition: all 0.25s ease-in-out;
+
+        &:hover {
+          background-color: #f8f9fa;
+          color: #000;
+        }
+
+        input {
+          display: none;
+        }
+      }
     }
 
     .ESignature {
@@ -114,13 +203,7 @@ export default new ComponentDescriptor({
           animation: Rotate 4s linear infinite;
         }
       }
-    
-      .dancing-script { font-family: 'Dancing Script', cursive; }
-      .great-vibes { font-family: 'Great Vibes', cursive; }
-      .homemade-apple { font-family: 'Homemade Apple', cursive; }
-      .marck-script { font-family: 'Marck Script', cursive; }
-      .sacramento { font-family: 'Sacramento', cursive; }
-      .satisfy { font-family: 'Satisfy', cursive; }
+
     }`
   },
 })
