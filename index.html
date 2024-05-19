@@ -5,17 +5,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>So Mote it be</title>
+  <style>
+    @media (prefers-color-scheme: light) {
+      body {
+        background-color: #f0f0f0;
+        color: #333;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #333;
+        color: #f0f0f0;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="fa.css">
 </head>
 
 <body>
-  <slide-toggle label="Nice to meet you" checked="true" />
+  <slide-toggle label="Nice to meet you" checked="true"></slide-toggle>
+
+  <div style="margin: auto; width: 50dvw;">
+    <e-sig>Antonio Bourassa</e-sig>
+  </div>
+
 </body>
 
 <script type="module">
   import Grimoire from './src/index.ts'
 
   (async () => {
-    await Grimoire.Define('slide-toggle');
+    await Grimoire.Define('slide-toggle', 'e-sig');
   })()
 </script>
 
