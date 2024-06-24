@@ -9,14 +9,30 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "preview": "vite preview",
     "iterate": "npm version patch && git push origin main --tags && npm publish --access public"
   },
   "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./dist": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dist/*": {
+      "import": "./dist/*.js",
+      "types": "./dist/*.d.ts"
+    },
+    "./dist/*.js": "./dist/*.js"
+  },
+  "imports": {
+    "#components/*.js": "./dist/components/*.js"
   },
   "dependencies": {
     "@magik_io/mote": "^1.6.3",
@@ -34,9 +50,6 @@
     "type": "git",
     "url": "git+https://github.com/MagikIO/grimoire.git"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
