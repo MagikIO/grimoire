@@ -1,7 +1,7 @@
 import { Mote } from '@magik_io/mote';
 import type { ComponentDescriptor } from './processing/ComponentDescriptor';
 
-export type GrimoireTemplateNames = ['slide-toggle', 'e-sig'];
+export type GrimoireTemplateNames = 'slide-toggle' | 'e-sig';
 const GrimoireImportMap: Record<GrimoireTemplateNames[number], () => Promise<{ default: ComponentDescriptor }>> = {
   'slide-toggle': () => import('./components/SlideToggle'),
   'e-sig': () => import('./components/ESig')
@@ -115,7 +115,7 @@ ${combinedBase}
     return this;
   }
 
-  public static async Define(...components: GrimoireTemplateNames) {
+  public static async Define(...components: Array<GrimoireTemplateNames>) {
     for await (const componentName of components) {
       const importFunction = GrimoireImportMap[componentName];
       if (!importFunction) throw new Error(`[GRIMOIRE] ~> Component ${componentName} not found`);
