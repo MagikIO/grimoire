@@ -1,6 +1,6 @@
 {
   "name": "@magik_io/grimoire",
-  "version": "1.8.6",
+  "version": "1.8.7",
   "description": "A Web Component Library for Genie",
   "engines": {
     "node": "21.*.*",
