@@ -8,8 +8,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "build": "vite build && vite optimize",
+    "preview": "vite build && vite optimize && vite preview",
     "iterate": "npm version patch && git push origin main --tags && npm publish --access public"
   },
   "type": "module",
@@ -36,11 +36,13 @@
   },
   "dependencies": {
     "@magik_io/mote": "^1.6.3",
+    "@rollup/plugin-typescript": "^11.1.6",
     "ulid": "^2.3.0"
   },
   "devDependencies": {
     "@magik_io/lint_golem": "^2.2.1",
     "eslint": "^9.5.0",
+    "tslib": "^2.6.3",
     "typescript": "^5.5.2",
     "typescript-eslint": "^7.13.1",
     "vite": "^5.3.1",
@@ -69,8 +71,7 @@
     "url": "https://github.com/MagikIO/grimoire/issues"
   },
   "browserslist": [
-    "defaults and fully supports es6-module",
-    "maintained node versions"
+    "defaults and fully supports es6-module"
   ],
   "homepage": "https://github.com/MagikIO/grimoire#readme",
   "packageManager": "yarn@4.3.1"
