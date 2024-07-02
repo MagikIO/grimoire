@@ -5,7 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.9.0] - 2024-07-02
+## [Unreleased]
+### Details
+#### Changed
+- Update GrimoireImportMap to use const assertion by @Abourass
+
+## [1.8.10] - 2024-07-02
 ### Details
 #### Changed
 - Update Node.js to version 22.4.0 and exclude additional files in VSCode settings by @Abourass
@@ -14,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update Grimoire import in index.html to use named import by @Abourass
 - Update Grimoire import in index.html to use named import by @Abourass
 - Update GrimoireImportMap to use const assertion by @Abourass
+- Add CHANGELOG.md by @Abourass
 
 ## [1.8.9] - 2024-06-24
 ### Details
@@ -77,7 +83,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add "magikio.magik-highlighting" to recommended extensions by @Abourass
 - Update npm dependencies and configuration files by @Abourass
 
-[1.9.0]: https://github.com/MagikIO/grimoire/compare/v1.8.9..v1.9.0
+[unreleased]: https://github.com/MagikIO/grimoire/compare/v1.8.10..HEAD
+[1.8.10]: https://github.com/MagikIO/grimoire/compare/v1.8.9..v1.8.10
 [1.8.9]: https://github.com/MagikIO/grimoire/compare/v1.8.8..v1.8.9
 [1.8.8]: https://github.com/MagikIO/grimoire/compare/v1.8.7..v1.8.8
 [1.8.7]: https://github.com/MagikIO/grimoire/compare/v1.8.6..v1.8.7
