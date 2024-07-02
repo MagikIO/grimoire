@@ -3,8 +3,8 @@ import type { ComponentDescriptor } from './processing/ComponentDescriptor';
 
 export type GrimoireTemplateNames = 'slide-toggle' | 'e-sig';
 const GrimoireImportMap = {
-  'slide-toggle': () => import('./components/SlideToggle.js'),
-  'e-sig': () => import('./components/ESig.js')
+  'slide-toggle': () => import('./components/SlideToggle'),
+  'e-sig': () => import('./components/ESig')
 } as const;
 
 type CustomChroma = { dark: string; light: string; }

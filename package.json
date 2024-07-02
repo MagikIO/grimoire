@@ -8,9 +8,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vite optimize",
-    "preview": "vite build && vite optimize && vite preview",
-    "iterate": "npm version patch && git push origin main --tags && npm publish --access public"
+    "build": "rollup -c",
+    "iterate": "git cliff -o && npm version patch && git push origin main --tags && npm publish --access public"
   },
   "type": "module",
   "main": "dist/index.js",
@@ -41,6 +40,7 @@
   },
   "devDependencies": {
     "@magik_io/lint_golem": "^2.2.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "eslint": "^9.5.0",
     "tslib": "^2.6.3",
     "typescript": "^5.5.2",
