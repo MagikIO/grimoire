@@ -2,14 +2,14 @@ import { Mote } from '@magik_io/mote';
 import type { ComponentDescriptor } from './processing/ComponentDescriptor';
 
 export type GrimoireTemplateNames = 'slide-toggle' | 'e-sig';
-const GrimoireImportMap: Record<GrimoireTemplateNames[number], () => Promise<{ default: ComponentDescriptor }>> = {
+const GrimoireImportMap = {
   'slide-toggle': () => import('./components/SlideToggle.js'),
   'e-sig': () => import('./components/ESig.js')
-}
+} as const;
 
 type CustomChroma = { dark: string; light: string; }
 
-export default class Grimoire {
+export class Grimoire {
   static activeComponents: Array<ComponentDescriptor> = [];
   static chroma: 'browser' | 'class' | CustomChroma | false = 'browser';
   public static Configure({ chroma = 'browser' }: { chroma: 'browser' | 'class' | CustomChroma | false }) {
@@ -122,6 +122,7 @@ ${combinedBase}
 
       const { default: component } = await importFunction();
       if (!component) throw new Error(`[GRIMOIRE] ~> Component ${componentName} not found`);
+      console.log(component)
 
       Grimoire.asAbove(component).soBelow(component)
     }
