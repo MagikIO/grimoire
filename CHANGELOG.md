@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Details
 #### Changed
+- Update npm dependencies to latest versions by @Abourass
+- Update npm dependency to latest stable version by @Abourass
+
+## [1.8.11] - 2024-07-02
+### Details
+#### Changed
+- Update GrimoireImportMap to use const assertion by @Abourass
 - Update GrimoireImportMap to use const assertion by @Abourass
 
 ## [1.8.10] - 2024-07-02
@@ -83,7 +90,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add "magikio.magik-highlighting" to recommended extensions by @Abourass
 - Update npm dependencies and configuration files by @Abourass
 
-[unreleased]: https://github.com/MagikIO/grimoire/compare/v1.8.10..HEAD
+[unreleased]: https://github.com/MagikIO/grimoire/compare/v1.8.11..HEAD
+[1.8.11]: https://github.com/MagikIO/grimoire/compare/v1.8.10..v1.8.11
 [1.8.10]: https://github.com/MagikIO/grimoire/compare/v1.8.9..v1.8.10
 [1.8.9]: https://github.com/MagikIO/grimoire/compare/v1.8.8..v1.8.9
 [1.8.8]: https://github.com/MagikIO/grimoire/compare/v1.8.7..v1.8.8
