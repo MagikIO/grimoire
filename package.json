@@ -3,13 +3,13 @@
   "version": "1.8.12",
   "description": "A Web Component Library for Genie",
   "engines": {
-    "node": "21.*.*",
-    "npm": "10.*.*"
+    "node": "22.*.*",
+    "pnpm": "9.*.*"
   },
   "scripts": {
     "dev": "vite",
     "build": "rollup -c",
-    "iterate": "npm version patch && git push origin main --tags && npm publish --access public"
+    "iterate": "pnpm version patch && git push origin main --tags && pnpm publish --access public"
   },
   "type": "module",
   "main": "dist/index.js",
@@ -35,19 +35,19 @@
   },
   "dependencies": {
     "@magik_io/mote": "^1.6.4",
-    "@rollup/plugin-typescript": "^11.1.6",
+    "@rollup/plugin-typescript": "^12.1.0",
     "ulid": "^2.3.0"
   },
   "devDependencies": {
-    "@magik_io/lint_golem": "^2.2.3",
+    "@magik_io/lint_golem": "^3.4.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "eslint": "^9.7.0",
     "rollup": "^4.18.1",
     "tslib": "^2.6.3",
     "typescript": "^5.5.3",
-    "typescript-eslint": "^7.16.0",
+    "typescript-eslint": "^8.8.1",
     "vite": "^5.3.3",
-    "vite-plugin-dts": "^3.9.1"
+    "vite-plugin-dts": "^4.2.4"
   },
   "repository": {
     "type": "git",
@@ -75,5 +75,5 @@
     "defaults and fully supports es6-module"
   ],
   "homepage": "https://github.com/MagikIO/grimoire#readme",
-  "packageManager": "yarn@4.3.1"
+  "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4"
 }
