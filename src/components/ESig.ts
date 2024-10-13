@@ -1,7 +1,7 @@
 import { Mote } from '@magik_io/mote';
 import { ComponentDescriptor } from '../processing/ComponentDescriptor';
 
-class ESig extends HTMLElement {
+export class ESig extends HTMLElement {
   protected __meta = {
     fonts: new Map([
       ['dancing-script', 'Dancing Script'],

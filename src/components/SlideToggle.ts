@@ -1,7 +1,7 @@
 import { Mote } from '@magik_io/mote';
 import { ComponentDescriptor } from '../processing/ComponentDescriptor';
 
-class SlideToggle extends HTMLElement {
+export class SlideToggle extends HTMLElement {
   protected __meta = { checked: false, label: '', idPrefix: 'slide-toggle' }
   protected __template = new Mote('template').addClass('SlideToggle')
   protected __input = new Mote('input').addClass('slide-input')
