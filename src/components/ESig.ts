@@ -67,6 +67,10 @@ class ESig extends HTMLElement {
         visualPicker.appendTo(selectionsContainer.element);
       })
 
+      if (!this.parentElement) {
+        throw new Error(`Parent element not found, unable to append font selections`)
+      }
+
       selectionsContainer.appendTo(this.parentElement);
     } catch (error) {
       console.error(error)
