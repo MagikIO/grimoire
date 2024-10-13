@@ -34,7 +34,7 @@
     "#components/*.js": "./dist/components/*.js"
   },
   "dependencies": {
-    "@magik_io/mote": "^1.6.4",
+    "@magik_io/mote": "^1.6.7",
     "@rollup/plugin-typescript": "^12.1.0",
     "ulid": "^2.3.0"
   },

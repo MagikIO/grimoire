@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@magik_io/mote':
-        specifier: ^1.6.4
-        version: 1.6.6
+        specifier: ^1.6.7
+        version: 1.6.7
       '@rollup/plugin-typescript':
         specifier: ^12.1.0
         version: 12.1.0(rollup@4.24.0)(tslib@2.7.0)(typescript@5.6.3)
@@ -260,8 +260,8 @@ packages:
     resolution: {integrity: sha512-9M1B39PTlhVL5ghgxXGChJH+Xp8IfLfKMK2ofcdNBeViVp2/i1gmtFgI5tx7JOVaVKZXPZMLuZXwgnijSq+qeg==}
     engines: {node: '22'}
 
-  '@magik_io/mote@1.6.6':
-    resolution: {integrity: sha512-H70ss6ZZjAN8cGoEgEBdeLyfqmvq5KssLc4PXgz1ZK/UsR/MYxbsygxVhn60yzVTfbl5h8xLW7lnHZGQ23Mt5Q==}
+  '@magik_io/mote@1.6.7':
+    resolution: {integrity: sha512-kY+qtBZDZVwx2SAG+Vt6mkI3laca/3A1ZvKHf8EKGtOqG8gBRvW3xH/0vx7be0bHIwSudT/q8HdFepheHZk2TA==}
     engines: {node: 22.*.*}
 
   '@microsoft/api-extractor-model@7.29.6':
@@ -1331,7 +1331,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@magik_io/mote@1.6.6': {}
+  '@magik_io/mote@1.6.7': {}
 
   '@microsoft/api-extractor-model@7.29.6':
     dependencies:

@@ -1,7 +1,17 @@
 import { Mote } from '@magik_io/mote';
 import type { ComponentDescriptor } from './processing/ComponentDescriptor';
+import type { ESig } from './components/ESig';
+import type { SlideToggle } from './components/SlideToggle';
 
 export type GrimoireTemplateNames = 'slide-toggle' | 'e-sig';
+
+declare global {
+  interface HTMLTagElementMap {
+    'slide-toggle': SlideToggle;
+    'e-sig': ESig;
+  }
+}
+
 const GrimoireImportMap = {
   'slide-toggle': () => import('./components/SlideToggle'),
   'e-sig': () => import('./components/ESig')
@@ -116,7 +126,8 @@ ${combinedBase}
   }
 
   public static async Define(...components: Array<GrimoireTemplateNames>) {
-    for await (const componentName of components) {
+    await Promise.all(components.map(async (componentName) => {
+
       const importFunction = GrimoireImportMap[componentName];
       if (!importFunction) throw new Error(`[GRIMOIRE] ~> Component ${componentName} not found`);
 
@@ -125,7 +136,7 @@ ${combinedBase}
       console.log(component)
 
       Grimoire.asAbove(component).soBelow(component)
-    }
+    }));
 
     Grimoire.Adorn();
 
