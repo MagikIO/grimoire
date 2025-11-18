@@ -9,6 +9,10 @@
   "scripts": {
     "dev": "vite",
     "build": "rollup -c",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "iterate": "pnpm version minor && git push origin main --tags && pnpm publish --access public"
   },
   "type": "module",
@@ -41,13 +45,17 @@
   "devDependencies": {
     "@magik_io/lint_golem": "^3.4.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "eslint": "^9.7.0",
-    "rollup": "^4.18.1",
+    "@testing-library/dom": "^10.4.1",
+    "@vitest/ui": "^4.0.10",
+    "eslint": "^9.39.1",
+    "happy-dom": "^20.0.10",
+    "rollup": "^4.53.2",
     "tslib": "^2.6.3",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.8.1",
-    "vite": "^5.3.3",
-    "vite-plugin-dts": "^4.2.4"
+    "vite": "^7.2.2",
+    "vite-plugin-dts": "^4.2.4",
+    "vitest": "^4.0.10"
   },
   "repository": {
     "type": "git",
