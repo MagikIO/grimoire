@@ -12,13 +12,29 @@ const nextTick = () => new Promise(resolve => setTimeout(resolve, 0));
 // Helper to get input element (it's inside the template)
 const getInput = (element: SlideToggle) => {
   const template = element.querySelector('template');
-  return template?.querySelector('input') || null;
+  if (!template) return null;
+
+  // HTML <template> elements store their content in a DocumentFragment
+  if (template.content && template.content.querySelector) {
+    return template.content.querySelector('input');
+  }
+
+  // Fallback to direct children (for non-standard template usage)
+  return template.querySelector('input');
 };
 
 // Helper to get label element
 const getLabel = (element: SlideToggle) => {
   const template = element.querySelector('template');
-  return template?.querySelector('label') || null;
+  if (!template) return null;
+
+  // HTML <template> elements store their content in a DocumentFragment
+  if (template.content && template.content.querySelector) {
+    return template.content.querySelector('label');
+  }
+
+  // Fallback to direct children (for non-standard template usage)
+  return template.querySelector('label');
 };
 
 describe('SlideToggle', () => {
