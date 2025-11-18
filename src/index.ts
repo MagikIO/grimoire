@@ -110,6 +110,11 @@ ${combinedBase}
   }
 
   protected static soBelow(component: ComponentDescriptor) {
+    // Check if custom element is already defined
+    if (customElements.get(component.name)) {
+      return this;
+    }
+
     switch (component.type) {
       case 'custom-element': {
         customElements.define(component.name, component.element);
@@ -133,7 +138,6 @@ ${combinedBase}
 
       const { default: component } = await importFunction();
       if (!component) throw new Error(`[GRIMOIRE] ~> Component ${componentName} not found`);
-      console.log(component)
 
       Grimoire.asAbove(component).soBelow(component)
     }));
